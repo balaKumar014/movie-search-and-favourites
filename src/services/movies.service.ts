@@ -33,7 +33,7 @@ export class MoviesService {
       this.favoriteMovies = jsonString ? JSON.parse(jsonString) : [];
       if (payload.actionType === 'addMovie') {
         // Check if movie already exists in favorites
-        const checkMovieExist = this.favoriteMovies.some((movie: any) => movie.imdbID === payload.imdbID);
+        const checkMovieExist = this.favoriteMovies.filter((movie: any) => movie.imdbID === payload.imdbID);
         if (checkMovieExist) return { message: 'Movie already added to favorites', status: 400 };
         else this.favoriteMovies.push(payload.imdbID);
       } else if (payload.actionType === 'removeMovie') {
