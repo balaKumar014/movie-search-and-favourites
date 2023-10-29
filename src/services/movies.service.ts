@@ -28,24 +28,20 @@ export class MoviesService {
 
   public async favorites(payload: any): Promise<any> {
     try {
-      // Read from file and parse JSON string to array
-      const jsonString = await fs.promises.readFile(this.favoritesFile, 'utf8');
+      const jsonString = await fs.promises.readFile(this.favoritesFile, 'utf8');// Read from file and parse JSON string to array
       this.favoriteMovies = jsonString ? JSON.parse(jsonString) : [];
-      if (payload.actionType === 'addMovie') {
-        // Check if movie already exists in favorites
-        const checkMovieExist = this.favoriteMovies.filter((movie: any) => movie.imdbID === payload.imdbID);
-        if (checkMovieExist) return { message: 'Movie already added to favorites', status: 400 };
+      const isMovieExist = this.favoriteMovies.includes(payload.imdbID);
+      if (payload.actionType === 'addMovie') { // Check if movie already exists in favorites
+        if (isMovieExist) return { message: 'Movie already added to favorites', status: 400 };
         else this.favoriteMovies.push(payload.imdbID);
       } else if (payload.actionType === 'removeMovie') {
-        // Remove the movie from favorites
-        this.favoriteMovies = this.favoriteMovies.filter((movie: any) => movie.imdbID !== payload.imdbID);
+        if (!isMovieExist) return { message: 'Movie not found in favorites', status: 400 };
+        else this.favoriteMovies = this.favoriteMovies.filter((movie: any) => movie.imdbID !== payload.imdbID); // Remove the movie from favorites
       }
-      // Write updated array back to file
-      await fs.promises.writeFile(this.favoritesFile, JSON.stringify(this.favoriteMovies, null, 2), 'utf8');
-      return { data: this.favoriteMovies, status: 200, message: 'Movie Added to Favorite' };
+      await fs.promises.writeFile(this.favoritesFile, JSON.stringify(this.favoriteMovies, null, 2), 'utf8');// Write updated array back to file
+      return { data: this.favoriteMovies, status: 200, message: `${payload.actionType} to Favorite` };
     } catch (err: any) {
-      this.logger.error("Movie Add to Favorite Failed", err);
-      return { data: err, message: 'Movie Add to Favorite Failed', status: 500 };
+      return { data: err, message: `${payload.actionType} to Favorite Failed`, status: 500 };
     }
   }
 
