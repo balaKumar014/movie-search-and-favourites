@@ -1,0 +1,38 @@
+{
+  "name": "Movie Search and Favourites",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.ts",
+    "build": "tsc -b tsconfig.json",
+  },
+  "`author": "Balakumar",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/swagger": "^7.1.14",
+    "@types/body-parser": "^1.19.4",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.9",
+    "axios": "^1.6.0",
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.14.0",
+    "class-validator-jsonschema": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1",
+    "omdbapi": "^4.0.0",
+    "routing-controllers": "^0.9.0-alpha.6",
+    "routing-controllers-openapi": "^3.0.0",
+    "swagger-ui-express": "^5.0.0",
+    "ts-node": "^10.9.1",
+    "typedi": "^0.10.0",
+    "typescript": "^5.2.2",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/swagger-ui-express": "^4.1.5"
+  }
+}
