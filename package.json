@@ -1,11 +1,11 @@
 {
-  "name": "Movie Search and Favourites",
+  "name": "Movie-Search-and-Favourites",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "build": "tsc -b tsconfig.json",
+    "build": "tsc -b tsconfig.json"
   },
   "`author": "Balakumar",
   "license": "ISC",
